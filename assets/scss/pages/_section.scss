@@ -1,0 +1,477 @@
+// Game Slider Section
+.game-slider {
+    .slick-current{
+        .single-box{
+            border: 1px solid #6311e7 !important;
+        }
+    }
+    .single{
+        .single-box{
+            border-radius: 20px;
+            background-color: var(--bs-white);
+            border: 1px solid #f2eaff;
+            margin: 0 15px;
+            text-align: center;
+            padding: 20px;
+            transition: 0.3s all;
+            &:hover{
+                border: 1px solid #6311e7;
+            }
+            .app-links{
+                margin-top: 15px;
+                display: grid;
+                a{
+                    margin-top: 15px;
+                }
+            }
+            img{
+                margin: auto;
+            }
+        }
+    }
+    .slick-arrow{
+        top: calc(50% - 30px);
+        &.slick-prev{
+            left: 8px;
+        }
+        &.slick-next{
+            right: 8px;
+        }
+    }
+}
+
+// About US 
+.about-us{
+    background-image: url(../images/about-us-bg.png);
+    background-repeat: no-repeat;
+    background-position: top;
+    .section-header{
+        p{
+            width: 75%;
+            margin: auto;
+        }
+    }
+    .magnific-area{
+        .bg-area{
+            position: relative;
+            &::after {
+                position: absolute;
+                content: "";
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                border-radius: 30px;
+                background-color: rgba(48, 37, 111, 0.8);
+            }
+        }
+        .mfp-iframe{
+            opacity: 1;
+        }
+        .mfp-iframe{
+            &::after {
+                position: absolute;
+                content: "";
+                border-radius: 50%;
+                width: 99px;
+                height: 99px;
+                background-color: #ff7a1f;
+            }
+            &::before {
+                position: absolute;
+                content: "";
+                width: 140px;
+                height: 140px;
+                border-radius: 50%;
+                border: 3px solid #ff7a1f;
+                animation: stretch 4s linear infinite;
+            }
+            img{
+                z-index: 2;
+            }
+        }
+    }
+    .content-area{
+        margin-top: 45px;
+        h2{
+            margin-top: 60px;
+        }
+        h2, p{
+            color: var(--bs-white);
+            text-align: center;
+        }
+    }
+}
+
+// Counter start
+.counter-section{
+    .single-box{
+        border-top-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+        background-color: #2a41a4;
+        text-align: center;
+        padding: 68px 0 65px;
+        p, h1{
+            color: var(--bs-white);
+        }
+        &.second{
+            background-color: #1d5f2c;
+        }
+        &.third{
+            background-color: #a4283a;
+        }
+        &.fourth{
+            background-color: #7e4c04;
+        }
+    }
+}
+
+// Team Member
+.team-member{
+    background-image: url(../images/team-bg.png);
+    background-repeat: no-repeat;
+    background-position: top;
+    .profile-image{
+        img{
+            width: 100%;
+        }
+    }
+    .slick-list {
+        margin-bottom: 125px;
+    }
+    .single-box{
+        text-align: center;
+        transition: 0.3s;
+        border-radius: 20px;
+        box-shadow: 0px 17px 19px rgba(109,100,139,0.1);
+        background-color: var(--bs-white);
+        padding: 10px;
+        margin: 0 15px;
+        margin-bottom: 25px;
+        &:hover{
+            box-shadow: 0px 17px 19px rgba(109,100,139,0.31);
+        }
+        h5{
+            margin: 16px 0 13px;
+        }
+        p{
+            color: var(--primary-color);
+            width: 80%;
+            margin: auto;
+        }
+        .social{
+            margin-top: 25px;
+            margin-bottom: 20px;
+            a{
+                width: 40px;
+                height: 40px;
+                border-radius: 20px;
+                border: 1px solid rgba(210,196,255,0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: 0.3s all;
+                margin: 0 10px;
+                i{
+                    color: #9c94b4;
+                }
+                &:hover{
+                    background-color: #ff7a1f;
+                    border: 1px solid rgba(255,255,255,0.5);
+                    i{
+                        color: var(--bs-white);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Gallery slider 
+.gallery-slider {
+    .slick-current{
+        transform: scale(1.7);
+    }
+    .slick-slide{
+        transition: 0.3s;
+    }
+    .slick-track{
+        margin: 145px 0 278px;
+    }
+}
+
+// We are Hiring 
+.we-are-hiring{
+    .single-area{
+        border-radius: 20px;
+        background-color: #f6f3ff;
+        padding: 40px 40px 30px;
+        margin: 0 15px;
+        button{
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+            padding: 0;
+            color: #201048;
+            margin-top: 15px;
+            i{
+                margin-left: 10px;
+            }
+        }
+    }
+    .info-area {
+        margin: 17px 0 14px;
+        .single-info{
+            display: flex;
+            align-items: center;
+            margin-right: 25px;
+            i{
+                margin-right: 5px;
+            }
+        }
+    }
+    a{
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        i{
+            margin-left: 10px;
+        }
+    }
+    .slick-list {
+        margin-bottom: 148px;
+    }
+}
+
+// Job Details
+.job-details{
+    .modal-dialog {
+        max-width: 860px;
+    }
+    .modal-content{
+        border-radius: 30px;
+        background-color: var(--bs-white);
+        padding: 60px 45px;
+        position: relative;
+        .modal-header{
+            position: absolute;
+            right: 25px;
+            top: 25px;
+            padding: 0;
+            border: none;
+            .btn-close{
+                background-color: var(--primary-color);
+                &:focus{
+                    box-shadow: none;
+                }
+            }
+        }
+        p, span, i, li{
+            color: #212529;
+        }
+        h2, h3, h4{
+            color: var(--secondary-color);
+        }
+        p, li{
+            margin: 5px 0;
+        }
+        h2, h3, h4{
+            margin: 10px 0;
+        }
+        ul{
+            margin: 20px 0;
+            li{
+                position: relative;
+                display: flex;
+                align-items: center;
+                margin-left: 30px;
+                &::before{
+                    position: absolute;
+                    content: '';
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 5px;
+                    background-color: #3a2274;
+                    left: -20px;
+                }
+            }
+        }
+        .btn-area{
+            a{
+                border-radius: 25px;
+                box-shadow: 0px 5px 0px #0b85cf, 0px 16px 4px rgba(56,174,246,0.27);
+                background-image: linear-gradient(0deg, #357eff 0%, #357eff 1%, #1be9ff 100%);
+                border: 2px solid #37b0f7;
+                font-weight: 700;
+                padding: 6px 40px;
+                text-transform: uppercase;
+            }
+        }
+    }
+    .top-bar{
+        border-bottom: 1px solid #3c4071;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+    }
+    .single-info{
+        display: flex;
+        align-items: center;
+        margin-right: 30px;
+        i{
+            margin-right: 5px;
+        }
+    }
+}
+
+// Contact Us 
+.contact-us{
+    background-image: url(../images/contact-circle.png);
+    background-repeat: no-repeat;
+    background-position: right top;
+    .single-box{
+        border-radius: 20px;
+        border: 1px solid #e2dafb;
+        padding: 25px 30px;
+        display: flex;
+        align-items: center;
+        .icon-area{
+            margin-right: 20px;
+            width: 96px;
+            height: 96px;
+            border-radius: 48px;
+            background-color: #ebe5ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .social{
+        border-top: 1px solid #e2dafb;
+        padding-top: 40px;
+        margin-top: 40px;
+        a{
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(210,196,255,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s all;
+            margin-right: 15px;
+            i{
+                color: #9c94b4;
+            }
+            &:hover{
+                background-color: #ff7a1f;
+                border: 1px solid rgba(255,255,255,0.5);
+                i{
+                    color: var(--bs-white);
+                }
+            }
+        }
+    }
+    form{
+        border-radius: 60px;
+        background-color: #f6f3ff;
+        padding: 60px;
+        button{
+            border-radius: 25px;
+            box-shadow: 0px 5px 0px #0b85cf, 0px 16px 4px rgba(56,174,246,0.27);
+            background-image: linear-gradient(0deg, #357eff 0%, #357eff 1%, #1be9ff 100%);
+            border: 2px solid #37b0f7;
+            font-weight: 700;
+            padding: 6px 60px;
+            text-transform: uppercase;
+        }
+        label{
+            font-weight: 700;
+        }
+    }
+}
+
+// For Dark 
+.dark{
+    .header-section .navbar .navbar-collapse .navbar-nav .nav-item .nav-link, 
+    .header-section .navbar .navbar-collapse .navbar-nav .nav-item .dropdown-item {
+        color: var(--dark-secondary-color);
+        &:hover, &.active{
+            color: var(--primary-color);
+        }
+    }
+    .banner-section {
+        .overlay {
+            background-color: #000642;
+        }
+    }
+
+    .header-section.header-fixed {
+        background-color: #000642;
+    }
+    
+    .game-slider .single .single-box {
+        background-color: #0c0f35;
+        border: 1px solid #432279;
+        &:hover{
+            border: 1px solid #6311e7;
+        }
+        .slick-current{
+            .single-box{
+                border: 1px solid #6311e7 !important;
+            }
+        }
+    }
+    
+    .about-us{
+        background-image: url(../images/about-us-dark-bg.png);
+    }
+    
+    .team-member{
+        background-image: url(../images/team-dark-bg.png);
+        .single-box {
+            background-color: #2c1860;
+        }
+    }
+    
+    .we-are-hiring{
+        .single-area{
+            background-color: #2c1860;
+            a, i{
+                color: var(--dark-secondary-color);
+            }
+            button {
+                color: var(--dark-secondary-color);
+            }
+        }
+    }
+
+    .job-details .modal-content {
+        background-color: #2c1860;
+        p, span, i, h2, h3, h4, li{
+            color: var(--bs-white);
+        }
+    }
+    
+    .contact-us{
+        .single-box{
+            border: 1px solid #4b3583;
+            .icon-area{
+                background-color: #2c1860;
+            }
+        }
+        .social{
+            border-top: 1px solid #372170;
+        }
+        form{
+            background-color: #271457;
+        }
+    }
+    
+    .footer-section .footer-form {
+        background-color: #3a2274;
+        form .form-group {
+            background-color: rgba(76,47,147,0.5);
+            border: 1px solid #55379e;
+        }
+    }
+}

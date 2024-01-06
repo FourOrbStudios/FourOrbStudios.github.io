@@ -1,248 +1,551 @@
-<!DOCTYPE html>
-<html xmlns='http://www.w3.org/1999/xhtml' lang='' xml:lang=''>
+<!doctype html>
+<html lang="en">
+
 <head>
-	<meta charset='utf-8' />
-	<meta name='viewport' content='width=device-width, user-scalable=no' />
-	<title>OreStorm Factory Demo</title>
-	<style type='text/css'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Four Orb Studios</title>
 
-		body {
-			touch-action: none;
-			margin: 0;
-			border: 0 none;
-			padding: 0;
-			text-align: center;
-			background-color: black;
-		}
-
-		#canvas {
-			display: block;
-			margin: 0;
-			color: white;
-		}
-
-		#canvas:focus {
-			outline: none;
-		}
-
-		.godot {
-			font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
-			color: #e0e0e0;
-			background-color: #3b3943;
-			background-image: linear-gradient(to bottom, #403e48, #35333c);
-			border: 1px solid #45434e;
-			box-shadow: 0 0 1px 1px #2f2d35;
-		}
-
-
-		/* Status display
-		 * ============== */
-
-		#status {
-			position: absolute;
-			left: 0;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			/* don't consume click events - make children visible explicitly */
-			visibility: hidden;
-		}
-
-		#status-progress {
-			width: 366px;
-			height: 7px;
-			background-color: #38363A;
-			border: 1px solid #444246;
-			padding: 1px;
-			box-shadow: 0 0 2px 1px #1B1C22;
-			border-radius: 2px;
-			visibility: visible;
-		}
-
-		@media only screen and (orientation:portrait) {
-			#status-progress {
-				width: 61.8%;
-			}
-		}
-
-		#status-progress-inner {
-			height: 100%;
-			width: 0;
-			box-sizing: border-box;
-			transition: width 0.5s linear;
-			background-color: #202020;
-			border: 1px solid #222223;
-			box-shadow: 0 0 1px 1px #27282E;
-			border-radius: 3px;
-		}
-
-		#status-indeterminate {
-			height: 42px;
-			visibility: visible;
-			position: relative;
-		}
-
-		#status-indeterminate > div {
-			width: 4.5px;
-			height: 0;
-			border-style: solid;
-			border-width: 9px 3px 0 3px;
-			border-color: #2b2b2b transparent transparent transparent;
-			transform-origin: center 21px;
-			position: absolute;
-		}
-
-		#status-indeterminate > div:nth-child(1) { transform: rotate( 22.5deg); }
-		#status-indeterminate > div:nth-child(2) { transform: rotate( 67.5deg); }
-		#status-indeterminate > div:nth-child(3) { transform: rotate(112.5deg); }
-		#status-indeterminate > div:nth-child(4) { transform: rotate(157.5deg); }
-		#status-indeterminate > div:nth-child(5) { transform: rotate(202.5deg); }
-		#status-indeterminate > div:nth-child(6) { transform: rotate(247.5deg); }
-		#status-indeterminate > div:nth-child(7) { transform: rotate(292.5deg); }
-		#status-indeterminate > div:nth-child(8) { transform: rotate(337.5deg); }
-
-		#status-notice {
-			margin: 0 100px;
-			line-height: 1.3;
-			visibility: visible;
-			padding: 4px 6px;
-			visibility: visible;
-		}
-	</style>
-<link id='-gd-engine-icon' rel='icon' type='image/png' href='OrestormFactoryDemo_64.icon.png' />
-<link rel='apple-touch-icon' href='OrestormFactoryDemo_64.apple-touch-icon.png'/>
-
+    <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/jquery-ui.css">
+    <link rel="stylesheet" href="assets/css/plugin/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/plugin/slick.css">
+    <link rel="stylesheet" href="assets/css/arafat-font.css">
+    <link rel="stylesheet" href="assets/css/plugin/animate.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
-	<canvas id='canvas'>
-		HTML5 canvas appears to be unsupported in the current browser.<br />
-		Please try updating or use a different browser.
-	</canvas>
-	<div id='status'>
-		<div id='status-progress' style='display: none;' oncontextmenu='event.preventDefault();'><div id ='status-progress-inner'></div></div>
-		<div id='status-indeterminate' style='display: none;' oncontextmenu='event.preventDefault();'>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-		</div>
-		<div id='status-notice' class='godot' style='display: none;'></div>
-	</div>
 
-	<script type='text/javascript' src='OrestormFactoryDemo_64.js'></script>
-	<script type='text/javascript'>//<![CDATA[
+<body class="dark">
+    <!-- start preloader -->
+    <div class="preloader" id="preloader"></div>
+    <!-- end preloader -->
 
-		const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"executable":"OrestormFactoryDemo_64","experimentalVK":false,"fileSizes":{"OrestormFactoryDemo_64.pck":10106128,"OrestormFactoryDemo_64.wasm":18228722},"focusCanvas":true,"gdnativeLibs":[]};
-		var engine = new Engine(GODOT_CONFIG);
+    <!-- Scroll To Top Start-->
+    <a href="javascript:void(0)" class="scrollToTop"><i class="fas fa-angle-double-up"></i></a>
+    <!-- Scroll To Top End -->
 
-		(function() {
-			const INDETERMINATE_STATUS_STEP_MS = 100;
-			var statusProgress = document.getElementById('status-progress');
-			var statusProgressInner = document.getElementById('status-progress-inner');
-			var statusIndeterminate = document.getElementById('status-indeterminate');
-			var statusNotice = document.getElementById('status-notice');
+    <!-- header-section start -->
+    <header class="header-section">
+        <div class="overlay">
+            <div class="container">
+                <div class="row d-flex header-area">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="index-light.html">
+                            <img src="assets/images/logo-dark.png" class="logo" alt="logo">
+                        </a>
+                        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbar-content">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-end" id="navbar-content">
+                            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="index-dark.html">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#games">Digital Games</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#boardgames">Board Games</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#art">Other Art</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#about-us">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#contact">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-section end -->
 
-			var initializing = true;
-			var statusMode = 'hidden';
+    <!-- Banner Section start -->
+    <section class="banner-section index">
+        <div class="overlay">
+            <div class="banner-content">
+                <div class="container wow fadeInUp">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-xl-7 col-lg-6 col-md-8">
+                            <div class="main-content">
+                                <div class="top-area section-text">
+                                    <h5 class="sub-title">Welcome to Four Orb Studios</h5>
+                                    <h1 class="title">Experimental Games And Art</h1>
+                                    <p class="xlr">We make weird things, to push the boundaries of what art is.</p>
+                                    <div class="btn-area mt-30">
+                                        <a href="#games" class="cmn-btn">
+                                            <i class="icon-b-right-arrow"></i>
+                                            Explore
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-6 col-md-8">
+                            <div class="sec-img">
+                                <img src="assets/images/circle.png" class="max-un" alt="image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner Section end -->
 
-			var animationCallbacks = [];
-			function animate(time) {
-				animationCallbacks.forEach(callback => callback(time));
-				requestAnimationFrame(animate);
-			}
-			requestAnimationFrame(animate);
+    <!-- Game Slider start -->
+    <section class="game-slider" id="games">
+        <div class="overlay pt-120 pb-120">
+            <div class="container">
+                <div class="row wow fadeInUp">
+                     <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <div class="section-header text-center">
+                                <h5 class="sub-title">Digital Games</h5>
+                                <p class="title">We sporadically release free games on Steam, Itch.io and other flash game sites.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-carousel">
+                        <div class="single">
+                            <div class="single-box">
+                                <img src="assets/images/games/game-img-1.png" alt="Image">
+                                <div class="app-links">
+                                    <a href="https://store.steampowered.com/app/2183740/Orestorm_Factory/"><img src="assets/images/steam.png" alt="Icon"></a>
+                                    <a href="https://fourorbstudios.itch.io/orestormfactory"><img src="assets/images/itch.png" alt="Icon"></a>
+                                    <p>Orestorm Factory is a BulletHell Roguelike where you build a factory of drills and processors to loot a cave, while dodging your way past enemies and your own deadly machinery along the way.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single">
+                            <div class="single-box">
+                                <img src="assets/images/games/game-img-2.png" alt="Image">
+                                <div class="app-links">
+                                    <a href="https://store.steampowered.com/app/2471690/Stress_Chess/"><img src="assets/images/steam.png" alt="Icon"></a>
+                                    <a href="https://fourorbstudios.itch.io/stress-chess"><img src="assets/images/itch.png" alt="Icon"></a>
+                                    <p>
+                                    Can you keep the Mc'Chess kids out of danger and checkmate the opponent?
+                                    The opponent will happily trade any piece in exchange for one of the Mc'Chess kids, so keep them safe, and most of all, have fun.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single">
+                            <div class="single-box">
+                                <img src="assets/images/games/game-img-3.png" alt="Image">
+                                <div class="app-links">
+                                    <a href="https://buggy-games.itch.io/deathcap-dungeon"><img src="assets/images/itch.png" alt="Icon"></a>
+                                    <p>
+                                        Deathcap Dungeon is a deckbuilder where your cards get stronger by not playing them.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single">
+                            <div class="single-box">
+                                <img src="assets/images/games/game-img-4.png" alt="Image">
+                                <div class="app-links">
+                                    <a href="https://buggy-games.itch.io/insecticide-bugsvsaliens"><img src="assets/images/itch.png" alt="Icon"></a>
+                                    <p>
+                                        Insecticide: Bugs vs Aliens dungeon is a tower defence game where you play as the enemy against an AI player that aims to emulate common tower defence strategies against you.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Game Slider end -->
 
-			function setStatusMode(mode) {
 
-				if (statusMode === mode || !initializing)
-					return;
-				[statusProgress, statusIndeterminate, statusNotice].forEach(elem => {
-					elem.style.display = 'none';
-				});
-				animationCallbacks = animationCallbacks.filter(function(value) {
-					return (value != animateStatusIndeterminate);
-				});
-				switch (mode) {
-					case 'progress':
-						statusProgress.style.display = 'block';
-						break;
-					case 'indeterminate':
-						statusIndeterminate.style.display = 'block';
-						animationCallbacks.push(animateStatusIndeterminate);
-						break;
-					case 'notice':
-						statusNotice.style.display = 'block';
-						break;
-					case 'hidden':
-						break;
-					default:
-						throw new Error('Invalid status mode');
-				}
-				statusMode = mode;
-			}
+    <!-- Game Slider start -->
+    <section class="boardgame-slider" id="boardgames">
+        <div class="overlay pt-120 pb-120">
+            <div class="container">
+                <div class="row wow fadeInUp">
+                     <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <div class="section-header text-center">
+                                <h5 class="sub-title">Board Games</h5>
+                                <p class="title">Our board games are free to print and play on Itch.IO, use on tabletop simulator, or you can purchase a physical copy from the board game crafter once the builds are finalised.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-carousel">
+                        <div class="single">
+                            <div class="single-box">
+                                <img src="assets/images/boardgames/game-img-1.png" alt="Image">
+                                <div class="app-links">
+                                    <a href="https://fourorbstudios.itch.io/too-many-brews"><img src="assets/images/itch.png" alt="Icon"></a>
+                                    <p>Too Many Brews: The Proxy-Only Card Game is a pointed criticism of the limited accessibility of collectable card games.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single">
+                            <div class="single-box">
+                                <img src="assets/images/boardgames/game-img-2.png" alt="Image">
+                                <div class="app-links">
+                                    <a href="#"><img src="assets/images/coming-soon.png" alt="Icon"></a>
+                                    <p>Plant Dance is bag building game where everyone shares a single bag.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single">
+                            <div class="single-box">
+                                <img src="assets/images/boardgames/game-img-3.png" alt="Image">
+                                <div class="app-links">
+                                    <a href="#"><img src="assets/images/coming-soon.png" alt="Icon"></a>
+                                    <p>ChadWiz is a co-op deckbuilder where your cards change abilities over time</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single">
+                            <div class="single-box">
+                                <img src="assets/images/boardgames/game-img-4.png" alt="Image">
+                                <div class="app-links">
+                                    <a href="#"><img src="assets/images/coming-soon.png" alt="Icon"></a>
+                                    <p>Goblin Alchemical is a deckbuilder where you don't shuffle your deck. On the surface it looks like a push your luck strategy game, but uses the chaos of a complex engine to suprise the player, rather than random chance.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single">
+                            <div class="single-box">
+                                <img src="assets/images/boardgames/game-img-5.png" alt="Image">
+                                <div class="app-links">
+                                    <a href="#"><img src="assets/images/coming-soon.png" alt="Icon"></a>
+                                    <p>Colorbot is a procedural puzzle game about instructing robots by giving colour-based directions. It explores the themes of the self and perspective by exploring how robots would observe the world around them.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Game Slider end -->
 
-			function animateStatusIndeterminate(ms) {
-				var i = Math.floor(ms / INDETERMINATE_STATUS_STEP_MS % 8);
-				if (statusIndeterminate.children[i].style.borderTopColor == '') {
-					Array.prototype.slice.call(statusIndeterminate.children).forEach(child => {
-						child.style.borderTopColor = '';
-					});
-					statusIndeterminate.children[i].style.borderTopColor = '#dfdfdf';
-				}
-			}
+    <!-- Game Slider start -->
+    <section class="art-slider" id="art">
+        <div class="overlay pt-120 pb-120">
+            <div class="container">
+                <div class="row wow fadeInUp">
+                     <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <div class="section-header text-center">
+                                <h5 class="sub-title">Art</h5>
+                                <p class="title">Other non-interact art peices we're working on can be found below.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-carousel">
+                         <div class="single">
+                                <div class="single-box">
+                                    <img src="assets/images/art/game-img-1.png" alt="Image">
+                                    <div class="app-links">
+                                        <p>Haxlore is a fantasy story built to explore the ethics of magical schools as a way to indoctrinate and weaponise aspiring mages.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single">
+                                <div class="single-box">
+                                    <img src="assets/images/art/game-img-2.png" alt="Image">
+                                    <div class="app-links">
+                                        <p>Autonomous Decoupling is a science fiction story pondering the future of autonomous vehicles without sufficient legislation.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single">
+                                <div class="single-box">
+                                    <img src="assets/images/art/game-img-3.png" alt="Image">
+                                    <div class="app-links">
+                                        <p>STOKS is black comedy exploring the ethics of running a business under capitalism. The initial spec scripts for six episodes has been written, we are currently looking for beta readers for the pilot.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Game Slider end -->
 
-			function setStatusNotice(text) {
-				while (statusNotice.lastChild) {
-					statusNotice.removeChild(statusNotice.lastChild);
-				}
-				var lines = text.split('\n');
-				lines.forEach((line) => {
-					statusNotice.appendChild(document.createTextNode(line));
-					statusNotice.appendChild(document.createElement('br'));
-				});
-			};
+    <!-- About US start -->
+    <section class="about-us" id="about-us">
+        <div class="overlay pt-120 pb-120">
+            <div class="container wow fadeInUp">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="section-header text-center">
+                            <h5 class="sub-title">Mission Statement</h5>
+                            <h2 class="title">Our goal is to make weird art accessible.</h2>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="magnific-area position-relative d-flex align-items-center justify-content-around">
+                            <div class="bg-area">
+                                <img class="bg-item" src="assets/images/video-bg.png" alt="image">
+                            </div>
+                            <div class="content-area position-absolute d-flex align-items-center justify-content-center">
+                                <div class="content-box">
+                                    <a class="mfp-iframe popupvideo d-flex align-items-center justify-content-center" href="https://www.youtube.com/watch?v=gEvkluSqDrw">
+                                        <img src="assets/images/icon/play-icon.png" alt="icon">
+                                    </a>
+                                    <h2>Meet FourOrbStudios</h2>
+                                    <p>Watch the trailer for our biggest game, Orestorm Factory!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About US end -->
 
-			function displayFailureNotice(err) {
-				var msg = err.message || err;
-				console.error(msg);
-				setStatusNotice(msg);
-				setStatusMode('notice');
-				initializing = false;
-			};
+    <!-- Counter start -->
+    <section class="counter-section">
+        <div class="overlay pb-120">
+            <div class="container wow fadeInUp">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-lg-6">
+                        <div class="section-area">
+                            <h5 class="sub-title">Our Stats</h5>
+                            <h2 class="title"></h2>
+                            <p>Since starting in 2022, we have receveived positive reception to our experiences from fans.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row cus-mar">
+                            <div class="col-sm-6 mt-60">
+                                <div class="single-box">
+                                    <h1><span class="counter">5</span></h1>
+                                    <p>Games launched</p>
+                                </div>
+                                <div class="single-box second">
+                                    <h1><span class="counter">60</span>K+</h1>
+                                    <p>Online Plays</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="single-box third">
+                                    <h1><span class="counter">500</span>+</h1>
+                                    <p>Downloads</p>
+                                </div>
+                                <div class="single-box fourth">
+                                    <h1><span class="counter">200</span>+</h1>
+                                    <p>Ratings</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Counter end -->
 
-			if (!Engine.isWebGLAvailable()) {
-				displayFailureNotice('WebGL not available');
-			} else {
-				setStatusMode('indeterminate');
-				engine.startGame({
-					'onProgress': function (current, total) {
-						if (total > 0) {
-							statusProgressInner.style.width = current/total * 100 + '%';
-							setStatusMode('progress');
-							if (current === total) {
-								// wait for progress bar animation
-								setTimeout(() => {
-									setStatusMode('indeterminate');
-								}, 500);
-							}
-						} else {
-							setStatusMode('indeterminate');
-						}
-					},
-				}).then(() => {
-					setStatusMode('hidden');
-					initializing = false;
-				}, displayFailureNotice);
-			}
-		})();
-	//]]></script>
+    <!-- Gallery slider start -->
+
+    <section class="gallery-slider">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-6">
+                <div class="section-area">
+                    <h5 class="sub-title">See our work in action</h5>
+                    <h2 class="title"></h2>
+                </div>
+            </div>
+        </div>
+        <div class="overlay pb-120">
+            <div class="container-fluid">
+                <div class="row cus-mar">
+                    <div class="gallery-carousel">
+                        <div class="single">
+                            <div class="single-area">
+                                <div class="image-area">
+                                    <img src="assets/images/gallery-img-01.png" alt="image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single">
+                            <div class="single-area">
+                                <div class="image-area">
+                                    <img src="assets/images/gallery-img-02.png" alt="image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single">
+                            <div class="single-area">
+                                <div class="image-area">
+                                    <img src="assets/images/gallery-img-03.png" alt="image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single">
+                            <div class="single-area">
+                                <div class="image-area">
+                                    <img src="assets/images/gallery-img-04.png" alt="image">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single">
+                            <div class="single-area">
+                                <div class="image-area">
+                                    <img src="assets/images/gallery-img-05.png" alt="image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Gallery slider end -->
+
+    <!-- Contact Us start -->
+    <section class="contact-us" id="contact">
+        <div class="overlay">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xxl-4 col-xl-5">
+                        <div class="section-header text-center">
+                            <h5 class="sub-title">Contact Us</h5>
+                            <h2 class="title">We'd love to hear from you</h2>
+                            <p>Stay in touch with us. Send us an email or start a conversation by filling the form below.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-lg-5">
+                        <div class="section-text">
+                            <h4>Reach us directly!</h4>
+                        </div>
+                        <div class="single-box">
+                            <div class="icon-area">
+                                <img src="assets/images/icon/email.png" alt="icon">
+                            </div>
+                            <div class="text-area">
+                                <h5>Email</h5>
+                                <p>fourorbstudios {at} gmail.com</p>
+                            </div>
+                        </div>
+                        <!--
+                        <div class="social">
+                            <h5>Follow us</h5>
+                            <ul class="d-flex mt-2 align-items-center">
+                                <li><a href="javascript:void(0)" tabindex="-1"><i class="fb fab fa-facebook-f"></i></a></li>
+                                <li><a href="javascript:void(0)" tabindex="-1"><i class="in fab fa-linkedin-in"></i></a></li>
+                                <li><a href="javascript:void(0)" tabindex="-1"><i class="tw fab fa-twitter"></i></a></li>
+                                <li><a href="javascript:void(0)" tabindex="-1"><i class="ins fab fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Us end -->
+
+    <!-- Footer Area Start -->
+    <footer class="footer-section">
+        <div class="container pt-120">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="footer-form">
+                        <div class="footer-top section-area mb-30 text-center">
+                            <h4 class="title">Keep in touch</h4>
+                            <p>Use <a href="https://forms.gle/7zwQEtJXHbiQNJpr9">this form</a> to subscribe to get updated on future game releases</p><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-area pt-120">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="footer-top d-flex align-items-center justify-content-between">
+                            <a href="index-light.html">
+                                <img src="assets/images/logo-dark.png" class="logo" alt="logo">
+                            </a>
+                            <div class="footer-box">
+                                <ul class="footer-link d-flex align-items-center gap-4">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="index-dark.html">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#games">Digital Games</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#boardgames">Board Games</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#art">Other Art</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#about-us">About Us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#contact">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-lg-8 d-flex justify-content-center justify-content-lg-start order-lg-0 order-1">
+                            <div class="copyright">
+                                <p>Copyright © 2023 <a href="#">FourOrbStudios</a>. All rights reserved. Design by <a href="https://themeforest.net/user/pixelaxis">PIXELAXIS</a></p>
+                            </div>
+                        </div>
+                        <!--
+                        <div class="col-xl-3 col-lg-4 d-flex justify-content-center justify-content-lg-end">
+                            <div class="social">
+                                <ul class="footer-link gap-2 d-flex align-items-center">
+                                    <li><a href="javascript:void(0)"><i class="fb fab fa-facebook-f"></i></a></li>
+                                    <li><a href="javascript:void(0)"><i class="in fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="javascript:void(0)"><i class="fab fa-google-play"></i></a></li>
+                                    <li><a href="javascript:void(0)"><i class="fab fa-apple"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Area End -->
+
+    <!--==================================================================-->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery-ui.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/fontawesome.js"></script>
+    <script src="assets/js/plugin/slick.js"></script>
+    <script src="assets/js/plugin/counter.js"></script>
+    <script src="assets/js/plugin/waypoint.min.js"></script>
+    <script src="assets/js/plugin/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/plugin/wow.min.js"></script>
+    <script src="assets/js/plugin/jquery.validate.min.js"></script>
+    <script src="assets/js/plugin/plugin.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
-</html>
 
+</html>
